@@ -90,7 +90,6 @@ module.exports = (app) => {
 
   // 错误处理
   app.use(async (err, req, res, next) => {
-    console.log(err);
     res.status(err.statusCode || 500).send({
       message: err.message,
     });

@@ -32,7 +32,6 @@ http.interceptors.response.use(
         router.push("/login");
       }
     }
-    console.log(err.response.data.message);
     return Promise.reject(err);
   }
 );

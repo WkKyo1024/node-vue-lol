@@ -21,7 +21,8 @@
               <el-form-item label="图片" style="margin-top:0.6rem;">
                 <el-upload
                   class="avatar-uploader"
-                  :action="$http.defaults.baseURL + '/upload'"
+                  :action="uploadUrl"
+                  :headers="getAuthHeaders()"
                   :show-file-list="false"
                   :on-success="(res) => (item.image = res.url)"
                 >

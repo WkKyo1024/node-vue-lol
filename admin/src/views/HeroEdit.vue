@@ -7,7 +7,8 @@
           <el-form-item label="头像">
             <el-upload
               class="avatar-uploader"
-              :action="$http.defaults.baseURL + '/upload'"
+              :action="uploadUrl"
+              :headers="getAuthHeaders()"
               :show-file-list="false"
               :on-success="afterUpload"
             >
@@ -119,7 +120,8 @@
                 <el-form-item label="技能图标">
                   <el-upload
                     class="avatar-uploader"
-                    :action="$http.defaults.baseURL + '/upload'"
+                    :action="uploadUrl"
+                    :headers="getAuthHeaders()"
                     :show-file-list="false"
                     :on-success="(res) => (item.icon = res.url)"
                   >

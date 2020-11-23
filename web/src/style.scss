@@ -20,7 +20,7 @@ a {
 }
 
 // colors
-$colors:("primary": #ab8e66, "black": #000, "dark": #222, "dark-1": #343434,
+$colors:("primary": #ab8e66, "black": #000, "dark": #222, "dark-1": #343434, "dark-2":#666,
   "grey": #999, "light": #f9f9f9, "white": #fff, );
 
 @each $colorKey,
@@ -43,7 +43,8 @@ $color in $colors {
 
 // font-size
 $base-font-size: 1rem;
-$font-sizes:(xs: 0.7143, // 10px 
+$font-sizes:(xxs:0.5714,
+  xs: 0.7143, // 10px 
   sm:0.8571, // 12px
   md:1, // 14px
   lg:1.1429, // 16px
@@ -54,7 +55,7 @@ $font-sizes:(xs: 0.7143, // 10px
 
 @each $sizeKey,
 $size in $font-sizes {
-  .font-#{$sizeKey} {
+  .fs-#{$sizeKey} {
     font-size: $size * $base-font-size
   }
 }
@@ -147,6 +148,25 @@ $type in $spacing-types {
       }
     }
   }
+}
 
+// button
+.btn {
+  border: none;
+  border-radius: 0.2857rem;
+  font-size: map-get($map: $font-sizes, $key: 'sm') * $base-font-size;
+  padding: 0.2rem 0.6rem;
+}
+
+// nav
+.nav {
+  .nav-item {
+    border-bottom: 2px solid transparent;
+    padding-bottom: 0.2rem;
+
+    &.active {
+      border-bottom: 2px solid #fff
+    }
+  }
 
 }

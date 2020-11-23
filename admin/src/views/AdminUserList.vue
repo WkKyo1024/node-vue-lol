@@ -34,7 +34,7 @@ export default {
       this.items = res.data;
     },
     async remove(row) {
-      this.$confirm(`是否确定要删除该"${row.name}"管理员?`, "提示", {
+      this.$confirm(`是否确定要删除该"${row.username}"管理员?`, "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",

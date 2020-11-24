@@ -1,3 +1,5 @@
+@import './_variables.scss';
+
 // 重置样式
 * {
   box-sizing: border-box;
@@ -19,9 +21,6 @@ a {
   color: #424242
 }
 
-// colors
-$colors:("primary": #ab8e66, "black": #000, "dark": #222, "dark-1": #343434, "dark-2":#666,
-  "grey": #999, "light": #f9f9f9, "white": #fff, );
 
 @each $colorKey,
 $color in $colors {
@@ -37,27 +36,26 @@ $color in $colors {
 // text-align
 @each $var in (left, center, right) {
   .text-#{$var} {
-    text-align: $var;
+    text-align: $var !important;
   }
 }
 
-// font-size
-$base-font-size: 1rem;
-$font-sizes:(xxs:0.5714,
-  xs: 0.7143, // 10px 
-  sm:0.8571, // 12px
-  md:1, // 14px
-  lg:1.1429, // 16px
-  llg:1.2857, // 18px
-  lllg:1.7143 // 24px
 
-);
 
 @each $sizeKey,
 $size in $font-sizes {
   .fs-#{$sizeKey} {
     font-size: $size * $base-font-size
   }
+}
+
+// width height
+.w-100 {
+  width: 100%;
+}
+
+.h-100 {
+  width: 100%;
 }
 
 // flex
@@ -70,12 +68,10 @@ $size in $font-sizes {
   flex-direction: column;
 }
 
-$flex-jc: (start: flex-start,
-  end:flex-end,
-  center:center,
-  between: space-between,
-  around:space-around,
-);
+.d-flex-wrap {
+  flex-wrap: wrap;
+}
+
 
 @each $key,
 $value in $flex-jc {
@@ -84,11 +80,7 @@ $value in $flex-jc {
   }
 }
 
-$flex-ai: (start: flex-start,
-  end:flex-end,
-  center:center,
-  stretch: stretch,
-);
+
 
 @each $key,
 $value in $flex-ai {
@@ -105,12 +97,7 @@ $value in $flex-ai {
   flex-grow: 1;
 }
 
-// spacing
-$spacing-types:(m:margin, p:padding);
-$spacing-directions:(t: top, r:right, b:bottom, l:left);
-$spacing-base-size: 1rem;
 
-$spacing-sizes:(0: 0, 1: 0.25, 2: 0.5, 3: 1, 4: 1.5, 5: 3);
 
 @each $typeKey,
 $type in $spacing-types {
@@ -160,13 +147,99 @@ $type in $spacing-types {
 
 // nav
 .nav {
+  display: flex;
+
   .nav-item {
-    border-bottom: 2px solid transparent;
+    border-bottom: 3px solid transparent;
     padding-bottom: 0.2rem;
 
     &.active {
-      border-bottom: 2px solid #fff
+      color: map-get($map: $colors, $key: 'primary');
+      border-bottom-color: map-get($map: $colors, $key: 'primary')
     }
   }
 
+  &.nav-inverse {
+    .nav-item {
+      color: map-get($map: $colors, $key: 'white');
+
+      &.active {
+        border-bottom-color: map-get($map: $colors, $key: 'white');
+      }
+    }
+  }
+
+}
+
+.sprite {
+  background: url(../images/comm-spr-ok.png) no-repeat 0 0;
+  background-size: 14.2857rem;
+  display: inline-block;
+
+  &.sprite-1 {
+    width: 1.4286rem;
+    height: 1.5714rem;
+    background-position: 14.444% 60%;
+  }
+
+  &.sprite-2 {
+    width: 1.5714rem;
+    height: 20px;
+    background-position: 84.746% 9.756%;
+  }
+
+  &.sprite-3 {
+    width: 1.5rem;
+    height: 1.5714rem;
+    background-position: 0 60%;
+  }
+
+  &.sprite-4 {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-position: 49.162% 100%;
+  }
+
+  &.sprite-5 {
+    width: 1.5714rem;
+    height: 1.3571rem;
+    background-position: 100% 9.756%;
+  }
+
+  &.sprite-6 {
+    width: 1.5714rem;
+    height: 1.3571rem;
+    background-position: 45.506% 37.398%;
+  }
+
+  &.sprite-7 {
+    width: 1.5714rem;
+    height: 1.4286rem;
+    background-position: 69.101% 9.836%;
+  }
+
+  &.sprite-8 {
+    width: 1.5714rem;
+    height: 1.5rem;
+    background-position: 0 38.017%;
+  }
+
+  &.sprite-9 {
+    width: 1.2857rem;
+    height: 1.5rem;
+    background-position: 50.549% 81.818%;
+  }
+
+  &.sprite-new {
+    width: 2.0714rem;
+    height: 1rem;
+    background-position: 63.158% 35.938%;
+  }
+
+  &.sprite-arrow {
+    width: 1.0714rem;
+    height: 0.6429rem;
+    background-position: 10.811% 94.737%;
+    transform: rotate(-90deg);
+  }
 }

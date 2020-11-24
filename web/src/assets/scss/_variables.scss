@@ -1,0 +1,33 @@
+// colors
+$colors:("primary": #ab8e66, "info": #4b67af, "black": #000, "dark": #222, "dark-1": #343434, "dark-2":#666,
+  "grey": #999, "light": #f9f9f9, "light-1":#d4d9de, "white": #fff, );
+
+$border-color: map-get($map: $colors, $key:'light-1');
+// font-size
+$base-font-size: 1rem;
+$font-sizes:(xxs:0.5714,
+  xs: 0.7143, // 10px 
+  sm:0.8571, // 12px
+  md:1, // 14px
+  lg:1.1429, // 16px
+  llg:1.2857, // 18px
+  lllg:1.7143 // 24px
+
+);
+$flex-jc: (start: flex-start,
+  end:flex-end,
+  center:center,
+  between: space-between,
+  around:space-around,
+);
+$flex-ai: (start: flex-start,
+  end:flex-end,
+  center:center,
+  stretch: stretch,
+);
+// spacing
+$spacing-types:(m:margin, p:padding);
+$spacing-directions:(t: top, r:right, b:bottom, l:left);
+$spacing-base-size: 1rem;
+
+$spacing-sizes:(0: 0, 1: 0.25, 2: 0.5, 3: 1, 4: 1.5, 5: 3);

@@ -17,6 +17,11 @@ Vue.component("lol-card", Card);
 import ListCard from "./components/ListCard.vue";
 Vue.component("lol-list-card", ListCard);
 
+import axios from "axios";
+Vue.prototype.$http = axios.create({
+  baseURL: "http://localhost:3000/web/api",
+});
+
 new Vue({
   router,
   render: (h) => h(App),

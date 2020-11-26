@@ -58,44 +58,40 @@
       </div>
     </div>
     <!-- end of nav icons -->
-    <!-- <lol-card title="新闻资讯" icon="news">
-      <div class="nav jc-between">
-        <div class="nav-item active">
-          <div class="nav-link">热门</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">新闻</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">公告</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">活动</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">赛事</div>
-        </div>
-      </div>
-      <div class="pt-3">
-        <swiper>
-          <swiper-slide v-for="m in 5" :key="m">
-            <div v-for="n in 5" :key="n" class="py-2">
-              <span>[新闻]</span>
-              <span>|</span>
-              <span>徐老师来巡山292：连接五个技</span>
-              <span>06/02</span>
-            </div>
-          </swiper-slide>
-        </swiper>
-      </div>
-    </lol-card> -->
+    <!-- 新闻列表 -->
     <lol-list-card title="新闻资讯" icon="news" :categories="newsCats">
       <template #items="{category}">
-        <div v-for="(news, i) in category.newsList" :key="i" class="py-2">
-          <span>{{ news.categoryName }}</span>
-          <span>|</span>
-          <span>{{ news.title }}</span>
-          <span>{{ news.data }}</span>
+        <div
+          v-for="(news, i) in category.newsList"
+          :key="i"
+          class="py-2 d-flex"
+        >
+          <span class="text-info">[{{ news.categoryName }}]</span>
+          <span class="px-2">|</span>
+          <span class="flex-1 fs-dark-1 text-ellipsis pr-2">{{
+            news.title
+          }}</span>
+          <span class="text-grey fs-sm">{{ news.createdAt | data }}</span>
+        </div>
+      </template>
+    </lol-list-card>
+    <!-- 英雄列表 -->
+    <lol-list-card
+      title="英雄列表"
+      icon="LOL-xiaguxianfeng"
+      :categories="heroCats"
+    >
+      <template #items="{category}">
+        <div class="d-flex d-flex-wrap" style="margin: 0 -0.5rem;">
+          <div
+            v-for="(hero, i) in category.heroList"
+            :key="i"
+            class="p-2 text-center"
+            style="width:20%"
+          >
+            <img :src="hero.avatar" class="w-100" />
+            <div>{{ hero.name }}</div>
+          </div>
         </div>
       </template>
     </lol-list-card>
@@ -129,7 +125,13 @@
 </template>
 
 <script>
+import dayjs from "dayjs";
 export default {
+  filters: {
+    data(val) {
+      return dayjs(val).format("MM/DD");
+    },
+  },
   name: "carrousel",
   data() {
     return {
@@ -143,99 +145,36 @@ export default {
         speed: 600,
         autoplay: true,
       },
-      newsCats: [
-        {
-          name: "热门",
-          newsList: [
-            {
-              categoryName: "公告",
-              title: "徐老师来巡山2：连接五个技",
-              data: "06/01",
-            },
-            {
-              categoryName: "公告",
-              title: "徐老师来巡山12：连接五个技",
-              data: "06/01",
-            },
-            {
-              categoryName: "公告",
-              title: "徐老师来巡山22：连接五个技",
-              data: "06/01",
-            },
-            {
-              categoryName: "公告",
-              title: "徐老师来巡山32：连接五个技",
-              data: "06/01",
-            },
-            {
-              categoryName: "公告",
-              title: "徐老师来巡山42：连接五个技",
-              data: "06/01",
-            },
-          ],
-        },
-        {
-          name: "新闻",
-          newsList: [
-            {
-              categoryName: "新闻",
-              title: "徐老师来巡山292：连接五个技",
-              data: "06/01",
-            },
-            {
-              categoryName: "新闻",
-              title: "徐老师来巡山24：连接五个技",
-              data: "06/01",
-            },
-            {
-              categoryName: "新闻",
-              title: "徐老师来巡山242：连接五个技",
-              data: "06/01",
-            },
-            {
-              categoryName: "新闻",
-              title: "徐老师来巡山292：连接五个技",
-              data: "06/01",
-            },
-            {
-              categoryName: "新闻",
-              title: "徐老师来巡山292：连接五个技",
-              data: "06/01",
-            },
-          ],
-        },
-        {
-          name: "公告",
-          newsList: [
-            {
-              categoryName: "公告",
-              title: "徐老师来巡山292：连接五个技",
-              data: "06/01",
-            },
-            {
-              categoryName: "公告",
-              title: "徐老师来巡山292：连接五个技",
-              data: "06/01",
-            },
-            {
-              categoryName: "公告",
-              title: "徐老师来巡山292：连接五个技",
-              data: "06/01",
-            },
-            {
-              categoryName: "公告",
-              title: "徐老师来巡山292：连接五个技",
-              data: "06/01",
-            },
-            {
-              categoryName: "公告",
-              title: "徐老师来巡山292：连接五个技",
-              data: "06/01",
-            },
-          ],
-        },
-      ],
+      newsCats: [],
+      heroCats: [],
     };
+  },
+  methods: {
+    async fetchNewsCats() {
+      const res = await this.$http.get("news/list");
+      this.newsCats = res.data;
+    },
+    async fetchHeroCats() {
+      const res = await this.$http.get("heros/list");
+      res.data.map((v) => {
+        if (v.name === "mage") {
+          v.name = "法师";
+        } else if (v.name === "fighter") {
+          v.name = "战士";
+        } else if (v.name === "tank") {
+          v.name = "坦克";
+        } else if (v.name === "assassin") {
+          v.name = "刺客";
+        } else if (v.name === "support") {
+          v.name = "辅助";
+        }
+      });
+      this.heroCats = res.data;
+    },
+  },
+  created() {
+    this.fetchNewsCats();
+    this.fetchHeroCats();
   },
   computed: {
     swiper() {

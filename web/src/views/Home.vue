@@ -61,7 +61,9 @@
     <!-- 新闻列表 -->
     <lol-list-card title="新闻资讯" icon="news" :categories="newsCats">
       <template #items="{category}">
-        <div
+        <router-link
+          tag="div"
+          :to="`/articles/${news._id}`"
           v-for="(news, i) in category.newsList"
           :key="i"
           class="py-2 d-flex"
@@ -72,7 +74,7 @@
             news.title
           }}</span>
           <span class="text-grey fs-sm">{{ news.createdAt | data }}</span>
-        </div>
+        </router-link>
       </template>
     </lol-list-card>
     <!-- 英雄列表 -->
@@ -83,7 +85,9 @@
     >
       <template #items="{category}">
         <div class="d-flex d-flex-wrap" style="margin: 0 -0.5rem;">
-          <div
+          <router-link
+            tag="div"
+            :to="`/heros/${hero._id}`"
             v-for="(hero, i) in category.heroList"
             :key="i"
             class="p-2 text-center"
@@ -91,7 +95,7 @@
           >
             <img :src="hero.avatar" class="w-100" />
             <div>{{ hero.name }}</div>
-          </div>
+          </router-link>
         </div>
       </template>
     </lol-list-card>

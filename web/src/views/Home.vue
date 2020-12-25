@@ -14,15 +14,6 @@
           @click="jump(`${item.url}`)"
         />
       </router-link>
-      <!-- <swiper-slide>
-        <img class="w-100" src="../assets/images/1.jpeg" alt="" srcset="" />
-      </swiper-slide>
-      <swiper-slide>
-        <img class="w-100" src="../assets/images/2.jpeg" alt="" srcset="" />
-      </swiper-slide>
-      <swiper-slide>
-        <img class="w-100" src="../assets/images/3.jpeg" alt="" srcset="" />
-      </swiper-slide> -->
       <div class="swiper-pagination pagination-home" slot="pagination"></div>
     </swiper>
     <!-- end of swiper -->
@@ -44,30 +35,32 @@
           <i class="sprite sprite-4"></i>
           <div>云顶之弈</div>
         </div>
-        <div class="nav-item mb-3 py-2">
+        <div class="nav-item mb-3 py-2" v-if="showSwitch === 1">
           <i class="sprite sprite-5"></i>
           <div>攻略中心</div>
         </div>
-        <div class="nav-item mb-3 py-2">
+        <div class="nav-item mb-3 py-2" v-if="showSwitch === 1">
           <i class="sprite sprite-6"></i>
           <div>LOL宇宙</div>
         </div>
-        <div class="nav-item mb-3 py-2">
+        <div class="nav-item mb-3 py-2" v-if="showSwitch === 1">
           <i class="sprite sprite-7"></i>
           <div>在线客服</div>
         </div>
-        <div class="nav-item mb-3 py-2">
+        <div class="nav-item mb-3 py-2" v-if="showSwitch === 1">
           <i class="sprite sprite-8"></i>
           <div>微信绑定</div>
         </div>
-        <div class="nav-item mb-3 py-2">
+        <div class="nav-item mb-3 py-2" v-if="showSwitch === 1">
           <i class="sprite sprite-9"></i>
           <div>购物商城</div>
         </div>
       </div>
       <div class="bg-light py-2 fs-md">
-        <i class="sprite sprite-arrow mr-1"></i>
-        <span>收起</span>
+        <i class="sprite sprite-arrow mr-1" v-if="showSwitch === 1"></i>
+        <i class="sprite sprite-arrow1 mr-1" v-else></i>
+        <span @click="changeSwitch()" v-if="showSwitch === 1">收起</span>
+        <span @click="changeSwitch()" v-else>展开</span>
       </div>
     </div>
     <!-- end of nav icons -->
@@ -112,32 +105,7 @@
         </div>
       </template>
     </lol-list-card>
-    <lol-card title="英雄列表" icon="news"> </lol-card>
     <lol-card title="精彩栏目" icon="news"> </lol-card>
-
-    <p>adfsadfasfasf</p>
-    <p>adfsadfasfasf</p>
-    <p>adfsadfasfasf</p>
-    <p>adfsadfasfasf</p>
-    <p>adfsadfasfasf</p>
-    <p>adfsadfasfasf</p>
-    <p>adfsadfasfasf</p>
-    <p>adfsadfasfasf</p>
-    <p>adfsadfasfasf</p>
-    <p>adfsadfasfasf</p>
-    <p>adfsadfasfasf</p>
-    <p>adfsadfasfasf</p>
-    <p>adfsadfasfasf</p>
-    <p>adfsadfasfasf</p>
-    <p>adfsadfasfasf</p>
-    <p>adfsadfasfasf</p>
-    <p>adfsadfasfasf</p>
-    <p>adfsadfasfasf</p>
-    <p>adfsadfasfasf</p>
-    <p>adfsadfasfasf</p>
-    <p>adfsadfasfasf</p>
-    <p>adfsadfasfasf</p>
-    <p>adfsadfasfasf</p>
   </div>
 </template>
 <script>
@@ -161,12 +129,17 @@ export default {
         speed: 600,
         autoplay: true,
       },
+      showSwitch: 0,
       newsCats: [],
       heroCats: [],
       adCats: [],
     };
   },
   methods: {
+    changeSwitch() {
+      this.showSwitch === 1 ? (this.showSwitch = 0) : (this.showSwitch = 1);
+      console.log(this.showSwitch);
+    },
     jump(url) {
       window.location.href = url;
       console.log(url);

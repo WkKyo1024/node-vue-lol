@@ -6,9 +6,13 @@
         <el-input v-model="model.name"></el-input>
       </el-form-item>
       <el-form-item>
+        <el-button type="primary" native-type="submit">保存</el-button>
+      </el-form-item>
+      <el-form-item>
         <el-button @click="model.items.unshift({})"
           ><i class="el-icon-plus"></i>添加广告</el-button
         >
+        
         <el-row type="flex" style="flex-wrap: wrap;">
           <el-col :md="24" v-for="(item, i) in model.items" :key="i">
             <el-card style="margin: 0.5rem 0.5rem"
@@ -41,9 +45,6 @@
             >
           </el-col>
         </el-row>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" native-type="submit">保存</el-button>
       </el-form-item>
     </el-form>
   </div>

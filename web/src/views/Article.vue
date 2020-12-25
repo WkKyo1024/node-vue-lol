@@ -1,7 +1,7 @@
 <template>
   <div class="page-article" v-if="this.model">
     <div class="d-flex ai-center pt-2 pb-3 px-2 border-bottom">
-      <div class="iconfont icon-back text-blue"></div>
+      <div class="iconfont icon-back text-blue" @click="prev()"></div>
       <strong class="flex-1 fs-sm text-blue">
         {{ model.title }}
       </strong>
@@ -44,6 +44,9 @@ export default {
     id: "fetch",
   },
   methods: {
+    prev() {
+      this.$router.go(-1);
+    },
     async fetch() {
       const res = await this.$http.get(`/articles/${this.id}`);
       this.model = res.data;

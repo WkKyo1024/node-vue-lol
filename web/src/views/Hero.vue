@@ -45,13 +45,14 @@
             <span>难度</span>
             <span class="badge bg-green-1">{{ model.scores.difficult }}</span>
           </div>
-          <router-link
+          <span class="text-light" @click="prev()">返回</span>
+          <!-- <router-link
             tag="span"
             v-show="model.scores"
             class="text-light"
             to="/"
             >返回</router-link
-          >
+          > -->
         </div>
       </div>
     </div>
@@ -179,6 +180,9 @@ export default {
     },
   },
   methods: {
+    prev() {
+      this.$router.go(-1);
+    },
     async fetch() {
       const res = await this.$http.get(`heroes/${this.id}`);
       this.model = res.data;

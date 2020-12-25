@@ -5,6 +5,7 @@ module.exports = (app) => {
   const Category = mongoose.model("Category");
   const Article = mongoose.model("Article");
   const Hero = mongoose.model("Hero");
+  const Ad = mongoose.model("Ad");
 
   // 新闻列表接口
   router.get("/news/list", async (req, res) => {
@@ -105,6 +106,13 @@ module.exports = (app) => {
       .populate("categories items1 items2 partners.hero")
       .lean();
 
+    res.send(data);
+  });
+  // 广告接口
+  router.get("/ads/list", async (req, res) => {
+    const data = await Ad.findOne({
+      name: "最新广告",
+    });
     res.send(data);
   });
   app.use("/web/api", router);

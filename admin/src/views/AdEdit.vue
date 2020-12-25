@@ -6,7 +6,7 @@
         <el-input v-model="model.name"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button @click="model.items.push({})"
+        <el-button @click="model.items.unshift({})"
           ><i class="el-icon-plus"></i>添加广告</el-button
         >
         <el-row type="flex" style="flex-wrap: wrap;">
@@ -79,6 +79,7 @@ export default {
     async fetch() {
       const res = await this.$http.get(`/rest/ads/${this.id}`);
       this.model = Object.assign({}, this.items, res.data);
+      console.log(this.model);
     },
   },
   created() {

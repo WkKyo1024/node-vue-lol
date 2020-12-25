@@ -1,15 +1,28 @@
 <template>
   <div>
     <swiper ref="mySwiper" :options="swiperOptions">
-      <swiper-slide>
-        <img class="w-100" src="../assets/images//1.jpeg" alt="" srcset="" />
+      <router-link
+        tag="swiper-slide"
+        :to="`${item.url}`"
+        v-for="(item, i) in adCats"
+        :key="i"
+        class="py-2 d-flex picture"
+      >
+        <img
+          class="w-100 index-100"
+          :src="`${item.image}`"
+          @click="jump(`${item.url}`)"
+        />
+      </router-link>
+      <!-- <swiper-slide>
+        <img class="w-100" src="../assets/images/1.jpeg" alt="" srcset="" />
       </swiper-slide>
       <swiper-slide>
         <img class="w-100" src="../assets/images/2.jpeg" alt="" srcset="" />
       </swiper-slide>
       <swiper-slide>
         <img class="w-100" src="../assets/images/3.jpeg" alt="" srcset="" />
-      </swiper-slide>
+      </swiper-slide> -->
       <div class="swiper-pagination pagination-home" slot="pagination"></div>
     </swiper>
     <!-- end of swiper -->
@@ -127,7 +140,6 @@
     <p>adfsadfasfasf</p>
   </div>
 </template>
-
 <script>
 import dayjs from "dayjs";
 export default {
@@ -151,12 +163,24 @@ export default {
       },
       newsCats: [],
       heroCats: [],
+      adCats: [],
     };
   },
   methods: {
+    jump(url) {
+      window.location.href = url;
+      console.log(url);
+    },
     async fetchNewsCats() {
       const res = await this.$http.get("news/list");
       this.newsCats = res.data;
+      console.log(window.location.href);
+    },
+    async fetchAdCats() {
+      const res = await this.$http.get("ads/list");
+      // this.adCats = res.data;
+      this.adCats = res.data.items.slice(0, 5);
+      console.log(this.adCats, 1);
     },
     async fetchHeroCats() {
       const res = await this.$http.get("heros/list");
@@ -174,10 +198,12 @@ export default {
         }
       });
       this.heroCats = res.data;
+      console.log(this.heroCats);
     },
   },
   created() {
     this.fetchNewsCats();
+    this.fetchAdCats();
     this.fetchHeroCats();
   },
   computed: {
@@ -217,6 +243,16 @@ export default {
     &:nth-child(4n) {
       border-right: none;
     }
+  }
+}
+@media (max-width: 768px) {
+  .picture {
+    height: 12rem;
+  }
+}
+@media (min-width: 769px) {
+  .picture {
+    height: 30rem;
   }
 }
 </style>
